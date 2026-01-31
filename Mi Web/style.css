@@ -1,0 +1,75 @@
+:root {
+    --primary-blue: #4f85e8;
+    --bg-dark: #0d1a2f;
+    --card-bg: #1a2c48;
+    --text-light: #e2e8f0;
+    --text-muted: #94a3b8;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-light);
+    min-height: 100vh;
+    background-color: var(--bg-dark); 
+    background-image:
+        linear-gradient(rgba(13, 26, 47, 0.7), rgba(13, 26, 47, 0.7)), url("fondo1.jpg"),
+        linear-gradient(rgba(13, 26, 47, 0.8), rgba(13, 26, 47, 0.8)), url("fondo2.jpg");
+    background-position: top center, top center, bottom center, bottom center;
+    background-repeat: no-repeat;
+    background-size: auto 50%, auto 50%, auto 50%, auto 50%;
+    background-attachment: fixed;
+}
+
+.navbar { position: fixed; top: 0; width: 100%; height: 70px; background: rgba(13, 26, 47, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-sizing: border-box; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.logo-container { display: flex; align-items: center; cursor: pointer; }
+.logo-img { height: 45px; width: auto; }
+.main-content { padding: 100px 20px 50px; max-width: 800px; margin: 0 auto; text-align: center; }
+.main-menu-links { margin-top: 80px; text-align: center; }
+.menu-btn { background: var(--card-bg); color: var(--primary-blue); padding: 10px 20px; border-radius: 8px; text-decoration: none; margin: 5px; display: inline-block; border: 1px solid var(--primary-blue); }
+
+.hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
+.text-blue { color: var(--primary-blue); }
+.hero p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; }
+.main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+.calculator-card { background: var(--card-bg); color: var(--text-light); padding: 30px; border-radius: 20px; box-shadow: 0 20px 25px rgba(0,0,0,0.3); }
+.input-group label { color: var(--text-light); }
+input, select { background: #0d1a2f; color: white; border: 1px solid #4f85e8; width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; box-sizing: border-box; }
+.btn-calc { background: var(--primary-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; }
+.result-display { margin-top: 20px; font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); }
+.detalle-box { background: rgba(0,0,0,0.2); border: 1px solid #4f85e8; margin-top: 20px; padding: 15px; border-radius: 10px; }
+.detalle-fila span { color: var(--text-light); }
+.total span { color: var(--primary-blue); }
+.tienda-hardware, .faq-section { margin-top: 60px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
+.grid-ofertas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+.card-producto { background: var(--card-bg); border-radius: 15px; overflow: hidden; color: var(--text-light); }
+.card-producto img { width: 100%; height: 150px; object-fit: contain; padding: 10px; background: var(--bg-dark); }
+.card-info { padding: 15px; text-align: left; }
+.precio-oferta { font-weight: 800; color: var(--primary-blue); }
+.btn-comprar { background: var(--primary-blue); color: white; display: block; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; }
+.currency-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; opacity: 0.05; z-index: -1; font-size: 4rem; }
+
+/* --- ESTILOS FAQ (ACCORDION) --- */
+.faq-section { text-align: left; }
+.faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 10px; overflow: hidden; }
+.faq-question { padding: 15px; cursor: pointer; background: rgba(0,0,0,0.2); display: flex; justify-content: space-between; font-weight: bold; }
+.faq-question span { transition: transform 0.3s; }
+.faq-question.active span { transform: rotate(45deg); }
+.faq-answer { padding: 0 15px; background: rgba(0,0,0,0.1); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-muted); }
+
+/* Media Query Celulares */
+@media (max-width: 768px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .news-widget { margin-top: 30px; }
+    .navbar { padding: 0 15px; }
+    body { background-attachment: scroll; }
+    .main-menu-links { margin-top: 90px; }
+}
+
+@media (max-width: 600px) {
+    .selector-doble { flex-direction: column; }
+    .intercambio { transform: rotate(90deg); padding: 0; }
+    .hero h2 { font-size: 1.8rem; }
+    .btn-calc { padding: 18px; font-size: 1.2rem; }
+    .grid-ofertas { grid-template-columns: 1fr; }
+}
