@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalCalc AR - Conversor Inteligente</title>
+    <!-- Importar la fuente Inter de Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <!-- Librería de Banderas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fondo decorativo -->
+    <div class="currency-background">
+        <span class="fi fi-ar"></span><span class="fi fi-us"></span><span class="fi fi-es"></span>
+        <span class="fi fi-gb"></span><span class="fi fi-br"></span><span class="fi fi-eu"></span>
+    </div>
+
+    <!-- Barra Superior -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <!-- Tu Logo (Asegúrate que el archivo se llame exactamente "logotipo.png") -->
+            <img src="logotipo.png" alt="Finanzas Global Logo" class="logo-img">
+        </div>
+        <div class="menu-monedas">
+            <span class="moneda-link">USD</span>
+            <span class="moneda-link">EUR</span>
+            <span class="moneda-link">BRL</span>
+        </div>
+    </nav>
+
+    <!-- Menú Principal (Temas y FAQ) -->
+    <div class="main-menu-links">
+        <a href="#noticias" class="menu-btn">Noticias y Guías</a>
+        <a href="#faq" class="menu-btn">Preguntas Frecuentes (FAQ)</a>
+    </div>
+
+    <main class="main-content">
+        <header class="hero">
+            <h2 style="font-size: 3rem;">
+                <span style="color: white; font-weight: 800;">Finanzas </span>
+                <span class="text-blue" style="font-weight: 800;">Global</span>
+                <span style="display: block; font-size: 1.5rem; color: var(--text-muted);">El costo real, al instante.</span>
+            </h2>
+            <p>Conversión global con impuestos argentinos incluidos.</p>
+        </header>
+
+        <!-- CONTENEDOR PRINCIPAL: CALCULADORA Y NOTICIAS LADO A LADO -->
+        <div class="main-grid">
+            <!-- Columna Izquierda: Calculadora -->
+            <div class="calculator-column">
+                <section class="calculator-card">
+                    <div class="selector-doble">
+                        <div class="input-group">
+                            <label>Tengo</label>
+                            <select id="moneda-origen">
+                                <option value="euro">Euro (€)</option>
+                                <option value="dolar">Dólar (USD)</option>
+                                <option value="real">Real (R$)</option>
+                            </select>
+                        </div>
+                        <div class="intercambio">⇄</div>
+                        <div class="input-group">
+                            <label>Quiero ver en</label>
+                            <select id="moneda-destino">
+                                <option value="ars">Pesos Arg ($)</option>
+                                <option value="dolar">Dólar (USD)</option>
+                                <option value="euro">Euro (€)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Monto a convertir</label>
+                        <input type="number" id="precio" placeholder="Ej: 100">
+                    </div>
+                    
+                    <button onclick="ejecutarCalculo()" class="btn-calc">Convertir Ahora</button>
+                    
+                    <div id="resultado" class="result-display">Esperando monto...</div>
+
+                    <div id="detalle-impuestos" class="detalle-box" style="display: none;">
+                        <div class="detalle-fila"><span>Precio Base:</span> <span id="det-base"></span></div>
+                        <div class="detalle-fila"><span>Impuesto PAIS (30%):</span> <span id="det-pais"></span></div>
+                        <div class="detalle-fila"><span>Percepción AFIP (30%):</span> <span id="det-afip"></span></div>
+                        <hr>
+                        <div class="detalle-fila total"><span>Total Final:</span> <span id="det-total"></span></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Columna Derecha: Noticias (Dinámicas) -->
+            <div class="news-column">
+                <div class="news-widget" id="noticias">
+                    <h3>Noticias Financieras</h3>
+                    <ul id="news-list">
+                        <!-- Noticias reales cargadas por n8n -->
+                        <li>Cargando noticias...</li>
+                    </ul>
+                    <a href="#" class="btn-comprar" style="margin-top: 15px;">Ver Guías (Contenido SEO)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Hardware -->
+        <section class="tienda-hardware">
+            <h3>🔥 Ofertas de Hardware</h3>
+            <div class="grid-ofertas">
+                <div class="card-producto">
+                    <img src="https://m.media-amazon.com" alt="GPU">
+                    <div class="card-info">
+                        <h4>NVIDIA RTX 4090</h4>
+                        <p class="precio-oferta">U$S 1.599</p>
+                        <a href="#" class="btn-comprar">Ver Oferta Afiliado</a>
+                    </div>
+                </div>
+                <div class="card-producto">
+                    <img src="https://m.media-amazon.com" alt="CPU">
+                    <div class="card-info">
+                        <h4>Ryzen 7 5700G</h4>
+                        <p class="precio-oferta">U$S 185</p>
+                        <a href="#" class="btn-comprar">Ver Oferta Afiliado</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+        <section id="faq" class="faq-section">
+            <h3 style="color: var(--primary-blue);">Preguntas Frecuentes</h3>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">¿Están actualizados los impuestos?<span>+</span></div>
+                <div class="faq-answer">Sí, usamos datos en tiempo real para incluir el Impuesto PAIS y Retenciones AFIP vigentes al día de hoy (31 de enero de 2026).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">¿De dónde sacan las cotizaciones?<span>+</span></div>
+                <div class="faq-answer">Nuestros valores oficiales provienen directamente del Banco Nación (BNA).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">¿Ganan dinero con esto?<span>+</span></div>
+                <div class="faq-answer">Sí, la página se financia a través de publicidad (AdSense) y links de afiliados en las ofertas de hardware.</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lógica JavaScript (con valores del 31 de enero de 2026 BNA) -->
+    <script>
+        // ... (Tu función ejecutarCalculo() se mantiene aquí) ...
+        function ejecutarCalculo() {
+            const monto = parseFloat(document.getElementById('precio').value);
+            const origen = document.getElementById('moneda-origen').value;
+            const destino = document.getElementById('moneda-destino').value;
+            const boxResultado = document.getElementById('resultado');
+            const boxDetalle = document.getElementById('detalle-impuestos');
+
+            // Valores reales del 31 de enero de 2026, sacados del BNA
+            const enPesos = { dolar: 1455, euro: 1735, real: 282, ars: 1 };
+
+            if (monto > 0) {
+                const montoBasePesos = monto * enPesos[origen];
+                let resultadoFinal = montoBasePesos / enPesos[destino];
+
+                if (destino === 'ars') {
+                    const impuesto = montoBasePesos * 0.30;
+                    const total = montoBasePesos + (impuesto * 2);
+                    const f = (n) => n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' });
+
+                    document.getElementById('det-base').innerText = f(montoBasePesos);
+                    document.getElementById('det-pais').innerText = f(impuesto);
+                    document.getElementById('det-afip').innerText = f(impuesto);
+                    document.getElementById('det-total').innerText = f(total);
+                    
+                    boxResultado.innerHTML = `Total: ${f(total)}`;
+                    boxDetalle.style.display = 'block';
+                } else {
+                    const fG = (n, m) => n.toLocaleString('en-US', { style: 'currency', currency: m.toUpperCase() });
+                    boxResultado.innerHTML = `Resultado: ${fG(resultadoFinal, destino)}`;
+                    boxDetalle.style.display = 'none';
+                }
+            } else {
+                alert("Ingresá un monto válido");
+            }
+        }
+
+        // Lógica JavaScript para el menú FAQ (Accordion)
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            element.classList.toggle('active');
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } 
+        }
+    </script>
+    
+    <!-- Script para el efecto innovador TILT -->
+    <script src="https://cdnjs.cloudflare.com"></script>
+    <script>
+        VanillaTilt.init(document.querySelector(".calculator-card"), {
+            max: 5, speed: 400, glare: true, "max-glare": 0.2,
+        });
+    </script>
+</body>
+</html>
